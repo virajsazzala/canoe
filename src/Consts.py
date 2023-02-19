@@ -1,0 +1,1 @@
+HASHMODES = ['header', 'nonce']
