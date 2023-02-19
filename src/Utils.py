@@ -1,8 +1,9 @@
 import hashlib
 from src.Block import Block
+
 class Utils:
     @staticmethod
-    def hashblock(block):
+    def hashblock(block: Block):
         enc = hashlib.sha256()
         enc.update(
             str(block.id) +
