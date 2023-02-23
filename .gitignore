@@ -133,3 +133,6 @@ dmypy.json
 .DS_Store
 .idea
 *.iml
+
+# Test files
+test.py
