@@ -9,16 +9,16 @@ class Utils:
         enc = hashlib.sha256()
 
         enc.update(
-            str(block.id) +
+            (str(block.id) +
             str(block.timestamp) +
             str(block.data) +
-            str(block.prevhash)
+            str(block.prevhash)).encode()
         ) if mode == "header" else enc.update(
-            str(block.id) +
+            (str(block.id) +
             str(block.timestamp) +
             str(block.data) +
             str(block.prevhash) +
-            str(block.getnonce())
+            str(block.getnonce)).encode()
         )
 
         return enc.hexdigest()
