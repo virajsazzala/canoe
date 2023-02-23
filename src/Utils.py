@@ -1,10 +1,9 @@
 import hashlib
-from src.Block import Block
 from src.Consts import *
 
 class Utils:
     @staticmethod
-    def hashblock(block: Block, mode: str):
+    def hashblock(block, mode: str):
         if mode not in HASHMODES:
             raise ValueError("Mode can be either header or nonce")
         enc = hashlib.sha256()

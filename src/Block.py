@@ -29,6 +29,7 @@ class Block:
         self.header = Utils.hashblock(self,'header')
         self.hash = Utils.hashblock(self, 'nonce')
 
+    @property
     def getnonce(self):
         return self._nonce
 
@@ -42,7 +43,7 @@ class Block:
         return Block(0,dt.datetime.now(), "Genesis", " ")
 
     @staticmethod
-    def create_block(oldblock: Block, data):
+    def create_block(oldblock, data):
         """
         Create a new Block.
 
