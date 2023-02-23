@@ -24,6 +24,8 @@ class Node:
         """
         A node has higher frequency if a node participates regularly in the validation process.
         
+        :param blockchain : the main blockchain's chain
+
         :return : an integer representing the average distance between all processed blocks 
 
         Note: smaller return value == Higher frequency
