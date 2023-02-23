@@ -20,7 +20,7 @@ class Node:
         self.stake = random.randint(0, 1000)
         self.processed_blocks = []
 
-    def validation_frequency(self):
+    def validation_frequency(self, blockchain):
         """
         A node has higher frequency if a node participates regularly in the validation process.
         
@@ -30,17 +30,17 @@ class Node:
         """
 
         # main chain
-        chain = bc.getChain()
+        chain = blockchain.getChain()
 
         # check only the last 10 processed blocks or under
-        if len(self.processed_blocks > 10):
+        if len(self.processed_blocks) > 10:
             recent_validations = self.processed_blocks[-10:]
         else:
             recent_validations = self.processed_blocks[:]
         
         # calculate the distance between each processed block, by referring to main chain
         distances = []
-        for i in range(len(recent_validations)):
+        for i in range(len(recent_validations) - 1):
             block_index = chain.index(recent_validations[i])
             next_block_index = chain.index(recent_validations[i+1])
             distances.append(next_block_index - block_index)
