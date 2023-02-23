@@ -1,5 +1,6 @@
 import random
 import datetime as dt
+from src.Blockchain import Blockchain as bc
 
 class Node:
     """
@@ -8,20 +9,71 @@ class Node:
 
     :param joined_on        : the data and time of the creation of Node
     :param rank             : the rank of the node on the rank chart
-    :param error_prob       : the probability of invalidation
+    :param error_prob       : the probability of invalidation (%)
     :param last_validation  : the time of the most recent validation
-    :param prev_validations : a list of all the previously validated blocks
+    :param processed_blocks : a list of all the previously validated blocks
     """
-    def __init__(self, rank: int, last_validation):
-        self.joined_on = dt.now()
-        self.rank = rank
+    def __init__(self):
+        self.joined_on = dt.datetime.now()
+        self.rank = 0
         self.error_prob = random.randint(0, 100)
         self.stake = random.randint(0, 1000)
-        self.prev_validations = []
-        self.last_validation = prev_validations[len(prev_validations) - 1].time_of_validation
+        self.processed_blocks = []
+
+    def validation_frequency(self):
+        """
+        A node has higher frequency if a node participates regularly in the validation process.
         
+        :return : an integer representing the average distance between all processed blocks 
+
+        Note: smaller return value == Higher frequency
+        """
+
+        # main chain
+        chain = bc.getChain()
+
+        # check only the last 10 processed blocks or under
+        if len(self.processed_blocks > 10):
+            recent_validations = self.processed_blocks[-10:]
+        else:
+            recent_validations = self.processed_blocks[:]
+        
+        # calculate the distance between each processed block, by referring to main chain
+        distances = []
+        for i in range(len(recent_validations)):
+            block_index = chain.index(recent_validations[i])
+            next_block_index = chain.index(recent_validations[i+1])
+            distances.append(next_block_index - block_index)
+        
+        # average of the distances to find the frequency
+        frequency = sum(distances) / len(distances)
+
+        return frequency
+
+    def update_rank(self, rank):
+        """
+        :param rank : new updated rank
+        """
+        self.rank = rank
+
+    def add_processed_block(self, processed_block):
+        """
+        add newly processed blocks by the node
+
+        :param processed_block : the block that has been processed by the node
+        """
+        self.processed_blocks.append(processed_block)
+        
+    def is_eligible(self, criteria):
+        """
+        a node is eligible if they have a specified min rank or
+        if they are new to the network
+
+        :param criteria : a dictionary of eligible criteria with keys - min_rank
+        
+        :return : a boolean value True or False 
+        """
+        return self.rank > criteria["min_rank"] or self.rank == 0
 
         
-    def is_eligible():
-            pass     
         

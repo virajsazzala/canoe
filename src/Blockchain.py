@@ -26,6 +26,8 @@ class Blockchain:
             Block.create_block(self.lastblock, data)
         )
 
+    def getChain(self):
+        return self.chain
 
     def print_chain(self):
         for i in self.chain:
