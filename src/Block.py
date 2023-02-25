@@ -59,12 +59,14 @@ class Block:
             oldblock.hash
         )
 
-    def mine_block(self):
+    def mine_block(self, difficulty):
         """
         Mine a block.
-
-        (first 4 places in the hash should be '0000')
+        
+        :param difficulty : Specifies the number of places that should be filled with zeros
         """
-        while(self.hash[:4] != '0000'):
+        while(self.hash[:difficulty] != str('').zfill(difficulty)):
             self._nonce += 1
             self.hash = Utils.hashblock(self, 'nonce')
+        
+        print(f"Block mined and the hash is: {self.hash}")
