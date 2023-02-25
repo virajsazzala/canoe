@@ -32,7 +32,7 @@ class Node:
         """
 
         # main chain
-        chain = blockchain.getChain()
+        chain = blockchain.getChain
 
         # check only the last 10 processed blocks or under
         if len(self.processed_blocks) > 10:
