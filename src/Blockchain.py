@@ -22,9 +22,9 @@ class Blockchain:
 
 
     def add_block(self, data):
-        self.chain.append(
-            Block.create_block(self.lastblock, data)
-        )
+        newBlock = Block.create_block(self.lastblock, data)
+        newBlock.mine_block()
+        self.chain.append(newBlock)
 
     @property
     def getChain(self):

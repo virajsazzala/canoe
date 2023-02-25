@@ -23,7 +23,7 @@ class Block:
     def __init__(self, id : int, timestamp, data, prevhash):
         self.id = id
         self.timestamp = timestamp
-        self._nonce = random.randint(0,1000)
+        self._nonce = 0
         self.data = data
         self.prevhash = prevhash
         self.header = Utils.hashblock(self,'header')
@@ -40,7 +40,7 @@ class Block:
 
         :return : Block with Index 0
         """
-        return Block(0,dt.datetime.now(), "Genesis", " ")
+        return Block(0,dt.datetime.now(), "Genesis", "0")
 
     @staticmethod
     def create_block(oldblock, data):
@@ -59,3 +59,12 @@ class Block:
             oldblock.hash
         )
 
+    def mine_block(self):
+        """
+        Mine a block.
+
+        (first 4 places in the hash should be '0000')
+        """
+        while(self.hash[:4] != '0000'):
+            self._nonce += 1
+            self.hash = Utils.hashblock(self, 'nonce')
