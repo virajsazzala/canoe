@@ -26,6 +26,7 @@ class Blockchain:
             Block.create_block(self.lastblock, data)
         )
 
+    @property
     def getChain(self):
         return self.chain
 
