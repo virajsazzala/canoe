@@ -77,5 +77,6 @@ class Node:
         """
         return self.rank > criteria["min_rank"] or self.rank == 0
 
-        
+    def print_node(self):
+        print(f"Joined On: {self.joined_on}\nRank: {self.rank}\nProbability Of Error: {self.error_prob}\nStake: {self.stake}\nProcessed Block: {self.processed_blocks}")
         
