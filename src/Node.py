@@ -13,12 +13,12 @@ class Node:
     :param last_validation  : the time of the most recent validation
     :param processed_blocks : a list of all the previously validated blocks
     """
-    def __init__(self):
+    def __init__(self, isNew=False):
         self.joined_on = dt.datetime.now()
         self.rank = 0
-        self.error_prob = random.randint(0, 100)
-        self.stake = random.randint(0, 1000)
         self.processed_blocks = []
+        self.stake = random.randint(0, 1000)
+        self.error_prob = 0 if isNew else random.randint(0, 100)
 
     def validation_frequency(self, blockchain):
         """
