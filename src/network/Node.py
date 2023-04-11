@@ -18,6 +18,7 @@ class Node:
         self.rank = 0
         self.processed_blocks = []
         self.stake = random.randint(0, 1000)
+        self.coin_age = 0
         self.error_prob = 0 if isNew else random.randint(0, 100)
 
     def validation_frequency(self, blockchain):
@@ -78,5 +79,5 @@ class Node:
         return self.rank > criteria["min_rank"] or self.rank == 0
 
     def print_node(self):
-        print(f"Joined On: {self.joined_on}\nRank: {self.rank}\nProbability Of Error: {self.error_prob}\nStake: {self.stake}\nProcessed Block: {self.processed_blocks}")
+        print(f"Joined On: {self.joined_on}\nRank: {self.rank}\nProbability Of Error: {self.error_prob}\nCoin Age: {self.coin_age}\nStake: {self.stake}\nProcessed Block: {self.processed_blocks}")
         
