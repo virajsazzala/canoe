@@ -1,4 +1,4 @@
-from src.Block import Block
+from src.chain.Block import Block
 from src.Utils import Utils
 
 

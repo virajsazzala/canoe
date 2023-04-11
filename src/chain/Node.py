@@ -1,11 +1,11 @@
 import random
 import datetime as dt
-from src.Blockchain import Blockchain as bc
+
 
 class Node:
     """
-    A representation of a Node
-    A node can be a part of the Validators class if all the requirements are met
+    A representation of a Node.
+    A node can be a part of the Validators class if all the requirements are met.
 
     :param joined_on        : the data and time of the creation of Node
     :param rank             : the rank of the node on the rank chart
