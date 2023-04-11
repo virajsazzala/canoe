@@ -42,8 +42,8 @@ class Block:
         """
         return Block(0,dt.datetime.now(), "Genesis", "0")
 
-    @staticmethod
-    def create_block(oldblock, data):
+    @classmethod
+    def create_block(cls, oldblock, data):
         """
         Create a new Block.
 
@@ -52,7 +52,7 @@ class Block:
 
         :return         : Block dependent on oldblock
         """
-        return Block(
+        return cls(
             oldblock.id +1,
             dt.datetime.now(),
             data,
