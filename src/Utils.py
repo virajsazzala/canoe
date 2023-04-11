@@ -4,7 +4,7 @@ from src.Consts import *
 class Utils:
     @staticmethod
     def hashblock(block, mode: str):
-        if mode not in HASHMODES:
+        if mode not in HASH_MODES:
             raise ValueError("Mode can be either header or nonce")
         enc = hashlib.sha256()
 

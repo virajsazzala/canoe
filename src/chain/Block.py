@@ -4,7 +4,6 @@ import random
 from src.Utils import *
 
 
-
 class Block:
     """
     A representation of a Block.
@@ -20,13 +19,14 @@ class Block:
     :param hash      : Hashed value of the entire block including Nonce.
 
     """
-    def __init__(self, id : int, timestamp, data, prevhash):
+
+    def __init__(self, id: int, timestamp, data, prevhash):
         self.id = id
         self.timestamp = timestamp
         self._nonce = 0
         self.data = data
         self.prevhash = prevhash
-        self.header = Utils.hashblock(self,'header')
+        self.header = Utils.hashblock(self, 'header')
         self.hash = Utils.hashblock(self, 'nonce')
 
     @property
@@ -40,7 +40,7 @@ class Block:
 
         :return : Block with Index 0
         """
-        return Block(0,dt.datetime.now(), "Genesis", "0")
+        return Block(0, dt.datetime.now(), "Genesis", "0")
 
     @classmethod
     def create_block(cls, oldblock, data):
@@ -53,7 +53,7 @@ class Block:
         :return         : Block dependent on oldblock
         """
         return cls(
-            oldblock.id +1,
+            oldblock.id + 1,
             dt.datetime.now(),
             data,
             oldblock.hash
@@ -65,8 +65,11 @@ class Block:
         
         :param difficulty : Specifies the number of places that should be filled with zeros
         """
-        while(self.hash[:difficulty] != str('').zfill(difficulty)):
+        while (self.hash[:difficulty] != str('').zfill(difficulty)):
             self._nonce += 1
             self.hash = Utils.hashblock(self, 'nonce')
-        
+
         print(f"Block mined and the hash is: {self.hash}")
+
+    # def __repr__(self):
+    #     pass
