@@ -6,14 +6,27 @@ Figure out running clients locally as well as across a network.
 
 import socket
 
-class Center:
+from src.network import Node
+
+class Network:
+    '''
+
+    '''
     def __init__(self):
         pass
+
+    @staticmethod
+    def register_node(self, node : Node):
+        pass
+
 
     def broadcast(self):
         pass
 
-    def updatechain(self):
+    def update_chain(self):
         pass
 
-    
+
+    def recieve_event(self):
+        pass
+
