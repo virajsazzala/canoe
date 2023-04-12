@@ -59,6 +59,6 @@ class ProofOfStake:
         for node in self.nodes:
             sum += node.error_prob
         
-        return sum/len(self.nodes)
+        return sum / len(self.nodes)
     
     
