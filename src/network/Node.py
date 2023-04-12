@@ -21,7 +21,7 @@ class Node:
         self.coin_age = 0
         self.error_prob = 0 if isNew else random.randint(0, 100)
 
-    def validation_frequency(self, blockchain):
+    def regularity(self, blockchain):
         """
         A node has higher frequency if a node participates regularly in the validation process.
         

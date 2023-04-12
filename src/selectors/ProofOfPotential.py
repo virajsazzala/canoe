@@ -12,13 +12,13 @@ class ProofOfPotential:
         """
 
         # sorting nodes based on importance.
-        sorted_nodes = sorted(self.nodes, key=lambda node: (node.error_prob, node.validation_frequency(self.blockchain), -node.stake))
+        sorted_nodes = sorted(self.nodes, key=lambda node: (node.error_prob, node.regularity(self.blockchain), -node.stake))
 
         # assign ranks to nodes (if regularity == 0, assign high score to rank last)
         rank = 1
         for i in range(len(sorted_nodes)):
             node = sorted_nodes[i]
-            if node.validation_frequency(self.blockchain) == 0:
+            if node.regularity(self.blockchain) == 0:
                 regularity_score = 99999
             node.rank = rank
             rank += 1
@@ -48,7 +48,7 @@ class ProofOfPotential:
         # get the list of new nodes
         new_nodes = []
         for node in nodes:
-            if node.validation_frequency(self.blockchain) == 0:
+            if node.regularity(self.blockchain) == 0:
                 new_nodes.append(node)
                 nodes.remove(node)
         
