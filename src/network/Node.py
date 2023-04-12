@@ -27,31 +27,37 @@ class Node:
         
         :param blockchain : the main blockchain's chain
 
-        :return : an integer representing the average distance between all processed blocks 
+        :return : an integer representing the regularity of validations.
 
         Note: smaller return value == Higher frequency
         """
 
-        # main chain
-        chain = blockchain.getChain
-
-        # check only the last 10 processed blocks or under
-        if len(self.processed_blocks) > 10:
-            recent_validations = self.processed_blocks[-10:]
+        if len(self.processed_blocks) == 0 or len(self.processed_blocks) == 1:
+            return 0
+        
         else:
-            recent_validations = self.processed_blocks[:]
-        
-        # calculate the distance between each processed block, by referring to main chain
-        distances = []
-        for i in range(len(recent_validations) - 1):
-            block_index = chain.index(recent_validations[i])
-            next_block_index = chain.index(recent_validations[i+1])
-            distances.append(next_block_index - block_index)
-        
-        # average of the distances to find the frequency
-        frequency = sum(distances) / len(distances)
+            # main chain
+            chain = blockchain.getChain
+            
+            # check only the last 10 processed blocks or under
+            if len(self.processed_blocks) > 10:
+                recent_validations = self.processed_blocks[-10:]
+            else:
+                recent_validations = self.processed_blocks[:]
+            
+            # calculate the distance between each processed block, by referring to main chain
+            distances = []
+            for i in range(len(recent_validations)-1):
+                block_index = chain.index(recent_validations[i])
+                next_block_index = chain.index(recent_validations[i+1])
+                distances.append(next_block_index - block_index)
+            
+            # average of the distances to find the frequency
+            average_distance = sum(distances) / len(distances)
 
-        return frequency
+            regularity = 1 / average_distance
+
+            return regularity
 
     def update_rank(self, rank):
         """
@@ -80,4 +86,3 @@ class Node:
 
     def print_node(self):
         print(f"Joined On: {self.joined_on}\nRank: {self.rank}\nProbability Of Error: {self.error_prob}\nCoin Age: {self.coin_age}\nStake: {self.stake}\nProcessed Block: {self.processed_blocks}")
-        
